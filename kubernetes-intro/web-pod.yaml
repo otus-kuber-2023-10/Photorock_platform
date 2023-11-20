@@ -8,6 +8,14 @@ spec:
   containers: 
   - name: web
     image: fei84/web:v0.0.1
+    ports:
+    - containerPort: 8000
+    readinessProbe:
+      httpGet:
+        path: /index.html
+        port: 80
+    livenessProbe:
+      tcpSocket: { port: 8000 }
     volumeMounts:
     - name: nginx-conf
       mountPath: /etc/nginx
