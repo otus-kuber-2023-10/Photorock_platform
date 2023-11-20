@@ -1,14 +1,15 @@
-# Photorock_platform
-Photorock Platform repository
-
-TASK 1
-
-Идем по методичке и последовательно создаем и применяем манифесты и указания которые указаны в ней
-
-Задание со *
-
-Для устраннения статуса Error пода frontend необходимо включить в манифест следующую секцию
-```console
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: frontend
+  name: frontend
+spec:
+  containers:
+  - image: fei84/hipster-frontend:v0.0.1
+    name: frontend
+    resources: {}
     env:
     - name: PORT
       value: "8080"
@@ -25,5 +26,7 @@ TASK 1
     - name: CHECKOUT_SERVICE_ADDR
       value: "checkoutservice:5050"
     - name: AD_SERVICE_ADDR
-      value: "adservice:9555
-```
+      value: "adservice:9555"
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}
