@@ -1,6 +1,7 @@
 # Photorock_platform
 Photorock Platform repository
 
+
 TASK 2
 
 Идем по методичке и последовательно создаем и применяем манифесты и указания которые указаны в ней
@@ -117,4 +118,5 @@ TASK 1
     - name: CHECKOUT_SERVICE_ADDR
       value: "checkoutservice:5050"
     - name: AD_SERVICE_ADDR
-``` 
+      value: "adservice:9555
+```
