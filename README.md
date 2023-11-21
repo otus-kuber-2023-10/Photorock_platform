@@ -1,6 +1,23 @@
 # Photorock_platform
 Photorock Platform repository
 
+TASK 4
+
+Задание c *
+
+Идем по методичке и последовательно создаем и применяем манифесты и указания по установке minio, которые указаны в ней
+
+Шифруем командой echo -n 'my_string' | base64 access_key и secret_key манифеста minio-statefulset.yaml и вносим их в secrets.yaml, затем применяем эти манифесты.
+
+Задание - создание и использование PVC -опциональное
+
+Проверка доступности ранее созданного файла в PVC одним подом в другом поде - файл в наличии
+```console
+sudo kubectl exec -it my-pod-2 -- /bin/bash
+root@my-pod-2:/# cat /app/data/data.txt
+Hello, Kubernetes Volumes!
+```
+
 TASK 3
 
 Идем по методичке и последовательно создаем и применяем манифесты и указания по установке IPVS, которые указаны в ней
