@@ -213,6 +213,5 @@ TASK 1
     - name: CHECKOUT_SERVICE_ADDR
       value: "checkoutservice:5050"
     - name: AD_SERVICE_ADDR
-```    
-
-
+      value: "adservice:9555
+```
