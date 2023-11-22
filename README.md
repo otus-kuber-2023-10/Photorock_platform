@@ -1,6 +1,7 @@
 # Photorock_platform
 Photorock Platform repository
 
+
 TASK 5
 
 Идем по методичке и последовательно создаем и применяем манифесты которые требуются.
@@ -85,6 +86,7 @@ kubectl get rolebindings,clusterrolebindings --all-namespaces -o wide | grep dev
 default       rolebinding.rbac.authorization.k8s.io/admin-dev                                           Role/admin-dev                                        101s                                                                                                                           dev/jane
 default       rolebinding.rbac.authorization.k8s.io/viewer-dev                                          Role/viewer-dev                                       87s                                                                                                                            dev/ken
 ```
+
 TASK 4
 
 Задание c *
@@ -314,6 +316,5 @@ TASK 1
     - name: CHECKOUT_SERVICE_ADDR
       value: "checkoutservice:5050"
     - name: AD_SERVICE_ADDR
-```    
-
-
+      value: "adservice:9555
+```
