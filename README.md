@@ -1,6 +1,92 @@
 # Photorock_platform
 Photorock Platform repository
 
+
+TASK 5
+
+Идем по методичке и последовательно создаем и применяем манифесты которые требуются.
+
+Задание Task01
+
+Проверяем
+```console
+kubectl get sa -A
+NAMESPACE            NAME                                     SECRETS   AGE
+default              dave                                     0         9m40s
+default              default                                  0         13m
+kube-node-lease      default                                  0         13m
+kube-public          default                                  0         13m
+kube-system          attachdetach-controller                  0         13m
+kube-system          bob                                      0         12m
+
+kubectl get rolebinding,clusterrolebinding \
+              --all-namespaces \
+              -o jsonpath='{range .items[?(@.subjects[0].name=="bob")]}
+                           [{.roleRef.kind},{.roleRef.name}]{end}'; echo
+
+                           [ClusterRole,cluster-admin]
+```
+Task02
+
+Проверяем
+```console
+kubectl get sa -n prometheus
+NAME      SECRETS   AGE
+carol     0         3s
+default   0         7s
+
+kubectl get ClusterRole
+NAME                                                                   CREATED AT
+admin                                                                  2023-11-22T15:32:20Z
+all-pod-viewer                                                         2023-11-22T16:11:48Z
+cluster-admin                                                          2023-11-22T15:32:20Z
+
+kubectl describe ClusterRole all-pod-viewer
+Name:         all-pod-viewer
+Labels:       <none>
+Annotations:  <none>
+PolicyRule:
+  Resources  Non-Resource URLs  Resource Names  Verbs
+  ---------  -----------------  --------------  -----
+  pods.*     []                 []              [get list watch]
+
+kubectl get rolebindings,clusterrolebindings --all-namespaces -o wide | grep prometheus
+            clusterrolebinding.rbac.authorization.k8s.io/all-pod-viewer                                         ClusterRole/all-pod-viewer                                                         4m31s                                    system:serviceaccounts:prometheus 
+```
+Task03
+
+Проверяем
+```console
+kubectl get sa -n dev
+NAME      SECRETS   AGE
+default   0         95s
+jane      0         91s
+ken       0         25s
+
+kubectl describe Role admin-dev -n dev
+Name:         admin-dev
+Labels:       <none>
+Annotations:  <none>
+PolicyRule:
+  Resources  Non-Resource URLs  Resource Names  Verbs
+  ---------  -----------------  --------------  -----
+  *.*        []                 []              [*]
+
+
+kubectl describe Role viewer-dev -n dev
+Name:         viewer-dev
+Labels:       <none>
+Annotations:  <none>
+PolicyRule:
+  Resources  Non-Resource URLs  Resource Names  Verbs
+  ---------  -----------------  --------------  -----
+  *.*        []                 []              [get list watch]
+
+kubectl get rolebindings,clusterrolebindings --all-namespaces -o wide | grep dev
+default       rolebinding.rbac.authorization.k8s.io/admin-dev                                           Role/admin-dev                                        101s                                                                                                                           dev/jane
+default       rolebinding.rbac.authorization.k8s.io/viewer-dev                                          Role/viewer-dev                                       87s                                                                                                                            dev/ken
+```
+
 TASK 4
 
 Задание c *
