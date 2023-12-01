@@ -56,8 +56,11 @@ working.</p>
 Задание с *
 
 Добавляем репозиторий  helm repo add ownrepo https://chartmuseum.158.160.128.32.sslip.io/api/charts
+
 Добавлем чарт в архив helm package frontend/
+
 Выгружаем его в chartmuseum curl --data-binary "@frontend-0.1.0.tgz" https://chartmuseum.158.160.128.32.sslip.io/api/charts
+
 Чтобы установить чарт нужно применить команду helm upgrade --install по аналогии указанной в методичке учитывая данные выше.
 
 Устанавливаем harbor
