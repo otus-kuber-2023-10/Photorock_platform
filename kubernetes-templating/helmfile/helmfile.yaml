@@ -1,0 +1,45 @@
+repositories:
+
+  - name: ingress-nginx
+    url: https://kubernetes.github.io/ingress-nginx
+
+  - name: jetstack
+    url: https://charts.jetstack.io
+
+  - name: chartmuseum
+    url: https://chartmuseum.github.io/charts
+
+  - name: harbor
+    url: https://helm.goharbor.io
+
+releases:
+  - name: ingress-nginx
+    createNamespace: true
+    namespace: nginx-ingress
+    chart: ingress-nginx/ingress-nginx
+
+  - name: cert-manager
+    createNamespace: true
+    namespace: cert-manager
+    chart: jetstack/cert-manager
+    set:
+      - name: installCRDs
+        value: true
+
+  - name: chartmuseum
+    needs:
+      - cert-manager/cert-manager
+    createNamespace: true
+    namespace: chartmuseum
+    chart: chartmuseum/chartmuseum
+    values:
+      - ../chartmuseum/values.yaml
+
+  - name: harbor
+    needs:
+      - cert-manager/cert-manager
+    createNamespace: true
+    namespace: harbor
+    chart: harbor/harbor
+    values:
+      - ../harbor/values.yaml
